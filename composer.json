@@ -1,78 +1,80 @@
 {
-  "name": "use-the-fork/synapse",
-  "require": {
-    "php": "^8.2",
-    "illuminate/container": "^10.0|^11.0",
-    "illuminate/database": "^10.0|^11.0",
-    "illuminate/events": "^10.0|^11.0",
-    "illuminate/support": "^10.0|^11.0",
-    "openai-php/client": "^0.10.1",
-    "phpstan/phpdoc-parser": "^1.32",
-    "saloonphp/saloon": "^3.0"
-  },
-  "require-dev": {
-    "orchestra/testbench": "^9.2",
-    "pestphp/pest": "^2.35",
-    "laravel/pint": "^1.17",
-    "pestphp/pest-plugin-arch": "^2.7",
-    "phpstan/phpstan": "^1.12",
-    "rector/rector": "^1.2"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "UseTheFork\\Synapse\\Tests\\": "tests/",
-      "Workbench\\App\\": "workbench/app/",
-      "Workbench\\Database\\Factories\\": "workbench/database/factories/",
-      "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+    "name": "use-the-fork/synapse",
+    "version": "0.2.1",
+    "require": {
+        "php": "^8.2",
+        "illuminate/container": "^10.0|^11.0",
+        "illuminate/database": "^10.0|^11.0",
+        "illuminate/events": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0",
+        "openai-php/client": "^0.10.1",
+        "phpstan/phpdoc-parser": "^1.32",
+        "saloonphp/saloon": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.2",
+        "pestphp/pest": "^2.35",
+        "laravel/pint": "^1.17",
+        "pestphp/pest-plugin-arch": "^2.7",
+        "phpstan/phpstan": "^1.12",
+        "rector/rector": "^1.2"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UseTheFork\\Synapse\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "UseTheFork\\Synapse\\": "src/",
+            "UseTheFork\\Synapse\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "UseTheFork\\Synapse\\SynapseServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "@php vendor/bin/pint -v",
+        "refactor": "@php vendor/bin/rector --debug",
+        "refactor-file": "@php vendor/bin/rector",
+        "test:refactor": "@php vendor/bin/rector --dry-run",
+        "test:types": "@php vendor/bin/phpstan analyse --ansi",
+        "test:type-coverage": "@php vendor/bin/pint --type-coverage --min=100",
+        "test:unit": "@php vendor/bin/pest --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:refactor",
+            "@test:types",
+            "@test:type-coverage",
+            "@test:unit"
+        ],
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
     }
-  },
-  "autoload": {
-    "psr-4": {
-      "UseTheFork\\Synapse\\": "src/",
-      "UseTheFork\\Synapse\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "UseTheFork\\Synapse\\SynapseServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "lint": "@php vendor/bin/pint -v",
-    "refactor": "@php vendor/bin/rector --debug",
-    "refactor-file": "@php vendor/bin/rector",
-    "test:refactor": "@php vendor/bin/rector --dry-run",
-    "test:types": "@php vendor/bin/phpstan analyse --ansi",
-    "test:type-coverage": "@php vendor/bin/pint --type-coverage --min=100",
-    "test:unit": "@php vendor/bin/pest --colors=always",
-    "test": [
-      "@test:lint",
-      "@test:refactor",
-      "@test:types",
-      "@test:type-coverage",
-      "@test:unit"
-    ],
-    "post-autoload-dump": [
-      "@clear",
-      "@prepare"
-    ],
-    "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
-    "prepare": "@php vendor/bin/testbench package:discover --ansi",
-    "build": "@php vendor/bin/testbench workbench:build --ansi",
-    "serve": [
-      "Composer\\Config::disableProcessTimeout",
-      "@build",
-      "@php vendor/bin/testbench serve"
-    ]
-  },
-  "config": {
-    "sort-packages": true,
-    "preferred-install": "dist",
-    "allow-plugins": {
-      "pestphp/pest-plugin": true,
-      "php-http/discovery": true
-    }
-  }
 }
