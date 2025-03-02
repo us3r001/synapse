@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## \[0.2.1\] - 2025-03-02
+
+### 🚀 Features
+- _(Commands)_ Add MakeAgentCommand to create agent & prompt view with a single command
+
+
 ## \[0.2.0\] - 2024-10-22
 
 ### 🚀 Features

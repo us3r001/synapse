@@ -1,0 +1,8 @@
+<message type="system">
+	### Instruction
+	you are a helpful assistant.
+
+    {{ outputSchema }}
+</message>
+{{ hasMemory }}
+@include('synapse::Parts.Input')

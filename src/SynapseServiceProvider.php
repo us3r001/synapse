@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace UseTheFork\Synapse;
 
 use Illuminate\Support\ServiceProvider;
+use UseTheFork\Synapse\Console\Commands\MakeAgentCommand;
 use UseTheFork\Synapse\Console\Commands\SynapseArtisan;
 use UseTheFork\Synapse\Console\Commands\SynapseInstall;
 
@@ -22,6 +23,7 @@ class SynapseServiceProvider extends ServiceProvider
             $this->commands([
                                 SynapseInstall::class,
                                 SynapseArtisan::class,
+                                MakeAgentCommand::class,
                             ]);
         }
 
